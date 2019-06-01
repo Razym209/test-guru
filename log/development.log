@@ -1,0 +1,657 @@
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:9
+  [1m[35m (102.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (86.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTests (20190528083718)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "level" integer, "category_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528083718_create_tests.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528083718"]]
+  ↳ bin/rails:9
+  [1m[35m (64.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateQuestions (20190528083804)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "level" integer, "test_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528083804_create_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528083804"]]
+  ↳ bin/rails:9
+  [1m[35m (136.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateAnswers (20190528083838)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "result" boolean, "question_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528083838_create_answers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528083838"]]
+  ↳ bin/rails:9
+  [1m[35m (88.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20190528083906)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528083906_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528083906"]]
+  ↳ bin/rails:9
+  [1m[35m (64.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateCategories (20190528083956)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528083956_create_categories.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528083956"]]
+  ↳ bin/rails:9
+  [1m[35m (78.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddTestsNullConstraint (20190528091743)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar DEFAULT NULL, "level" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT NULL, "category_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:4
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:4
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer NOT NULL, "category_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:4
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:4
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer NOT NULL, "category_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:5
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:5
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:5
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer NOT NULL, "category_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:5
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:5
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  ↳ db/migrate/20190528091743_add_tests_null_constraint.rb:5
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528091743"]]
+  ↳ bin/rails:9
+  [1m[35m (43.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddAnswerNullConstraint (20190528091832)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text DEFAULT NULL, "result" boolean DEFAULT NULL, "question_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:3
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean DEFAULT NULL, "question_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "answers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "aanswers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aanswers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean DEFAULT NULL, "question_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:4
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:4
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "answers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "aanswers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aanswers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:5
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:5
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:5
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:5
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "answers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "aanswers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:5
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aanswers"[0m
+  ↳ db/migrate/20190528091832_add_answer_null_constraint.rb:5
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528091832"]]
+  ↳ bin/rails:9
+  [1m[35m (52.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddCategoryNullConstraint (20190528091937)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acategories" ("id" integer NOT NULL PRIMARY KEY, "title" varchar DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091937_add_category_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "acategories" ("id","title","created_at","updated_at")
+                     SELECT "id","title","created_at","updated_at" FROM "categories"[0m
+  ↳ db/migrate/20190528091937_add_category_null_constraint.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "categories"[0m
+  ↳ db/migrate/20190528091937_add_category_null_constraint.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528091937_add_category_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("id","title","created_at","updated_at")
+                     SELECT "id","title","created_at","updated_at" FROM "acategories"[0m
+  ↳ db/migrate/20190528091937_add_category_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "acategories"[0m
+  ↳ db/migrate/20190528091937_add_category_null_constraint.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528091937"]]
+  ↳ bin/rails:9
+  [1m[35m (72.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddQuestionNullConstraint (20190528092000)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aquestions" ("id" integer NOT NULL PRIMARY KEY, "body" text DEFAULT NULL, "level" integer DEFAULT NULL, "test_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aquestions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "questions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "questions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer DEFAULT NULL, "test_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "questions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "aquestions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aquestions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aquestions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer DEFAULT NULL, "test_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:4
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aquestions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "questions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "questions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:4
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer NOT NULL, "test_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:4
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "questions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "aquestions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aquestions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aquestions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer NOT NULL, "test_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:5
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aquestions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "questions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:5
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "questions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:5
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer NOT NULL, "test_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:5
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "questions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "aquestions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:5
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aquestions"[0m
+  ↳ db/migrate/20190528092000_add_question_null_constraint.rb:5
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528092000"]]
+  ↳ bin/rails:9
+  [1m[35m (56.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddUserNullConstraint (20190528092120)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ausers" ("id" integer NOT NULL PRIMARY KEY, "first_name" varchar DEFAULT NULL, "last_name" varchar DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "ausers" ("id","first_name","last_name","created_at","updated_at")
+                     SELECT "id","first_name","last_name","created_at","updated_at" FROM "users"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "users"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer NOT NULL PRIMARY KEY, "first_name" varchar NOT NULL, "last_name" varchar DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "users" ("id","first_name","last_name","created_at","updated_at")
+                     SELECT "id","first_name","last_name","created_at","updated_at" FROM "ausers"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "ausers"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "ausers" ("id" integer NOT NULL PRIMARY KEY, "first_name" varchar NOT NULL, "last_name" varchar DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:4
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "ausers" ("id","first_name","last_name","created_at","updated_at")
+                     SELECT "id","first_name","last_name","created_at","updated_at" FROM "users"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "users"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer NOT NULL PRIMARY KEY, "first_name" varchar NOT NULL, "last_name" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:4
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "users" ("id","first_name","last_name","created_at","updated_at")
+                     SELECT "id","first_name","last_name","created_at","updated_at" FROM "ausers"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "ausers"[0m
+  ↳ db/migrate/20190528092120_add_user_null_constraint.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528092120"]]
+  ↳ bin/rails:9
+  [1m[35m (80.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-05-28 09:37:06.474139"], ["updated_at", "2019-05-28 09:37:06.474139"]]
+  ↳ bin/rails:9
+  [1m[35m (66.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddTestsLevelDefaultValue (20190528094205)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer NOT NULL, "category_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 0 NOT NULL, "category_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  ↳ db/migrate/20190528094205_add_tests_level_default_value.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528094205"]]
+  ↳ bin/rails:9
+  [1m[35m (56.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddQuestionsLevelDefaultValue (20190528094238)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aquestions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer NOT NULL, "test_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528094238_add_questions_level_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aquestions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "questions"[0m
+  ↳ db/migrate/20190528094238_add_questions_level_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "questions"[0m
+  ↳ db/migrate/20190528094238_add_questions_level_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "level" integer DEFAULT 0 NOT NULL, "test_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528094238_add_questions_level_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "questions" ("id","body","level","test_id","created_at","updated_at")
+                     SELECT "id","body","level","test_id","created_at","updated_at" FROM "aquestions"[0m
+  ↳ db/migrate/20190528094238_add_questions_level_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aquestions"[0m
+  ↳ db/migrate/20190528094238_add_questions_level_default_value.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528094238"]]
+  ↳ bin/rails:9
+  [1m[35m (61.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersLevelDefaultValue (20190528094305)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528094305_add_answers_level_default_value.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528094305_add_answers_level_default_value.rb:3
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528094305_add_answers_level_default_value.rb:3
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528094305)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528094305)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528094305)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528100606)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528100606)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528100606)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528100606)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddAnswersCorrectDefaultValue (20190528100606)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean DEFAULT 0 NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "answers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "aanswers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aanswers"[0m
+  ↳ db/migrate/20190528100606_add_answers_correct_default_value.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190528100606"]]
+  ↳ bin/rails:9
+  [1m[35m (94.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateJoinTableUserTest (20190531155533)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531155533"]]
+  ↳ bin/rails:9
+  [1m[35m (65.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateTestPassages (20190531155614)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190531155614_create_test_passages.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "test_passages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL)[0m
+  ↳ db/migrate/20190531155614_create_test_passages.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531155614"]]
+  ↳ bin/rails:9
+  [1m[35m (104.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to DropTestsUsers (20190531155635)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531155635"]]
+  ↳ bin/rails:9
+  [1m[35m (58.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateTestUsers (20190531161027)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190531161027_create_test_users.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "test_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531161027_create_test_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531161027"]]
+  ↳ bin/rails:9
+  [1m[35m (117.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to RemoveResultFromAnswers (20190531164956)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aanswers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "result" boolean DEFAULT 0 NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aanswers" ("id","body","result","question_id","created_at","updated_at")
+                     SELECT "id","body","result","question_id","created_at","updated_at" FROM "answers"[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "answers"[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer NOT NULL PRIMARY KEY, "body" text NOT NULL, "question_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "answers" ("id","body","question_id","created_at","updated_at")
+                     SELECT "id","body","question_id","created_at","updated_at" FROM "aanswers"[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aanswers"[0m
+  ↳ db/migrate/20190531164956_remove_result_from_answers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531164956"]]
+  ↳ bin/rails:9
+  [1m[35m (152.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddCorrectToAnswers (20190531165027)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "answers" ADD "correct" boolean[0m
+  ↳ db/migrate/20190531165027_add_correct_to_answers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531165027"]]
+  ↳ bin/rails:9
+  [1m[35m (116.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddCategoriesTitleNullConstraint (20190531165055)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acategories" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531165055_add_categories_title_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "acategories" ("id","title","created_at","updated_at")
+                     SELECT "id","title","created_at","updated_at" FROM "categories"[0m
+  ↳ db/migrate/20190531165055_add_categories_title_null_constraint.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "categories"[0m
+  ↳ db/migrate/20190531165055_add_categories_title_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531165055_add_categories_title_null_constraint.rb:3
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("id","title","created_at","updated_at")
+                     SELECT "id","title","created_at","updated_at" FROM "acategories"[0m
+  ↳ db/migrate/20190531165055_add_categories_title_null_constraint.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "acategories"[0m
+  ↳ db/migrate/20190531165055_add_categories_title_null_constraint.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531165055"]]
+  ↳ bin/rails:9
+  [1m[35m (84.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateJoinTableUserTest (20190531165759)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "tests_users" ("user_id" integer NOT NULL, "test_id" integer NOT NULL)[0m
+  ↳ db/migrate/20190531165759_create_join_table_user_test.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_tests_users_on_user_id_and_test_id" ON "tests_users" ("user_id", "test_id")[0m
+  ↳ db/migrate/20190531165759_create_join_table_user_test.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_tests_users_on_test_id_and_user_id" ON "tests_users" ("test_id", "user_id")[0m
+  ↳ db/migrate/20190531165759_create_join_table_user_test.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531165759"]]
+  ↳ bin/rails:9
+  [1m[35m (97.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddUserIdToAnswer (20190531165947)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "answers" ADD "user_id" integer[0m
+  ↳ db/migrate/20190531165947_add_user_id_to_answer.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531165947"]]
+  ↳ bin/rails:9
+  [1m[35m (59.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateAnswerTests (20190531170249)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "answer_tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531170249_create_answer_tests.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531170249"]]
+  ↳ bin/rails:9
+  [1m[35m (102.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateCategoryTests (20190531170303)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "category_tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531170303_create_category_tests.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531170303"]]
+  ↳ bin/rails:9
+  [1m[35m (159.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateQuestionTests (20190531170322)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "question_tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531170322_create_question_tests.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531170322"]]
+  ↳ bin/rails:9
+  [1m[35m (69.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateTestTests (20190531170806)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "test_tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190531170806_create_test_tests.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190531170806"]]
+  ↳ bin/rails:9
+  [1m[35m (178.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
