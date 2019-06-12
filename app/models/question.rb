@@ -11,9 +11,6 @@
                                     greater_than_or_equal_to: 0 
                                   }
 
-  validates :test_id, presence: true,
-                      numericality: { only_integer: true }
-
   validate :validation_answers_count_range, on: :update
 
   def validation_answers_count_range
