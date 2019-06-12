@@ -4,6 +4,6 @@ class Setting < ApplicationRecord
   scope :max_answers, -> { value_by_setting(:max_answers).to_i }
   scope :min_answers, -> { value_by_setting(:min_answers).to_i }
 
-  validates :name, presence: true
+  validates :name, :value , presence: true
   validates :value, presence: true
 end
