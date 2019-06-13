@@ -22,14 +22,6 @@ end
 
 def table_empty(model)
   print_msg(model, 'Таблица пуста')
-
-def data_was_created(model)
-  puts "Данные созданы: #{model} (#{model.count})"
-end
-
-def data_was_clear(model)
-  puts "Данные очищены: #{model} (#{model.count})"
-
 end
 
 def id(model, params)
@@ -37,7 +29,7 @@ def id(model, params)
 end
 
 
-models = [Role, User, Category, Test, TestPassage, Question, Answer]
+models = [Role, User, Category, Test, TestPassage, Question, Answer, Setting]
 models.each do |model|
   if model.count > 0
     data_was_clear(model) if model.destroy_all
@@ -46,6 +38,20 @@ models.each do |model|
   end
 end
 puts
+
+Setting.create!([
+  {
+    name: 'Макс. кол-во ответов на вопрос',
+    setting: 'max_answers',
+    value: '4'
+  },
+  {
+    name: 'Мин. кол-во ответов на вопрос',
+    setting: 'min_answers',
+    value: '1'
+  }
+])
+data_was_created(Setting)
 
 Role.create!([
 {
@@ -78,6 +84,7 @@ models = [User, Category, Test, TestUser, Question, Answer]
 models.each { |model| data_was_clear(model) if model.destroy_all }
 
 
+
 User.create!([
 {
   first_name: 'Сергей',
@@ -86,13 +93,10 @@ User.create!([
 {
   first_name: 'Мира',
   last_name:  'Елкова',
-
 },
 {
   first_name: 'Миша',
   last_name:  'Дубов'
-
-
 }
 ]);
 data_was_created(User)
@@ -150,7 +154,6 @@ Test.create!([
 ]);
 data_was_created(Test)
 
-
 TestAuthor.create!([
   {
     user_id: id(User, { last_name: 'Дубов' }),
@@ -194,29 +197,6 @@ TestPassage.create!([
   },
 ])
 data_was_created(TestPassage)
-
-Question.create!([
-
-
-TestUser.create!([
-  {
-    user_id: id(User, { last_name: 'Луков' }),
-    test_id: id(Test, { title: 'Модели Ruby on Rails' })
-  },
-  {
-    user_id: id(User, { last_name: 'Луков' }),
-    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' })
-  },
-  {
-    user_id: id(User, { last_name: 'Елкова' }),
-    test_id: id(Test, { title: 'Основы PHP' })
-  },
-  {
-    user_id: id(User, { last_name: 'Елкова' }),
-    test_id: id(Test, { title: 'Основы HTML' })
-  },
-])
-data_was_created(TestUser)
 
 Question.create!([
 
@@ -316,25 +296,24 @@ data_was_created(Question)
 Answer.create!([
   {
     body: 'текст',
-    user_id: id(User, { last_name: 'Луков' }),
     question_id: id(Question, { body: 'текст' }),
     correct: true
   },
   {
     body: 'текст',
-    user_id: id(User, { last_name: 'Луков' }),
+
     question_id: id(Question, { body: 'текст' }),
     correct: true
   },
   {
     body: 'текст',
-    user_id: id(User, { last_name: 'Елкова' }),
+
     question_id: id(Question, { body: 'текст' }),
     correct: true,
   },
   {
     body: 'текст',
-    user_id: id(User, { last_name: 'Елкова' }),
+
     question_id: id(Question, { body: 'текст' }),
     correct: false,
   }
