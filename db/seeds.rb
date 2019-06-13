@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # Вопросы для "Основы CSS"
 
+
 def print_msg(model, msg)
   puts "-> #{model}: #{msg} (#{model.count})"
 end
@@ -26,6 +27,7 @@ end
 def id(model, params)
   model.where(params).pluck(:id).first
 end
+
 
 models = [Role, User, Category, Test, TestPassage, Question, Answer, Setting]
 models.each do |model|
@@ -77,6 +79,11 @@ RoleUser.create!([
 ])
 ])
 data_was_created(RoleUser)
+
+models = [User, Category, Test, TestUser, Question, Answer]
+models.each { |model| data_was_clear(model) if model.destroy_all }
+
+
 
 User.create!([
 {
@@ -237,7 +244,7 @@ Question.create!([
     level: 1,
     test_id: id(Test, { title: 'Ruby' })
   },
-  #
+
   {
     #id: 8
     body: 'текст',
@@ -294,16 +301,19 @@ Answer.create!([
   },
   {
     body: 'текст',
+
     question_id: id(Question, { body: 'текст' }),
     correct: true
   },
   {
     body: 'текст',
+
     question_id: id(Question, { body: 'текст' }),
     correct: true,
   },
   {
     body: 'текст',
+
     question_id: id(Question, { body: 'текст' }),
     correct: false,
   }

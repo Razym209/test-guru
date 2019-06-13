@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_05_31_170927) do
 
-
   create_table "answers", force: :cascade do |t|
     t.string "body", null: false
     t.integer "question_id", null: false
@@ -87,7 +86,4 @@ ActiveRecord::Schema.define(version: 2019_05_31_170927) do
     t.datetime "updated_at", null: false
   end
 end
-
-
-
 

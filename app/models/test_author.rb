@@ -7,4 +7,4 @@ class TestAuthor < ApplicationRecord
   validates :test_id, presence: true,
                       numericality: { only_integer: true }
 end
-# Я нипонял воросса мне убрать возможностей иметь несколько авторов или нет?
+
