@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # Вопросы для "Основы CSS"
 
+
 def print_msg(model, msg)
   puts "-> #{model}: #{msg} (#{model.count})"
 end
@@ -21,11 +22,20 @@ end
 
 def table_empty(model)
   print_msg(model, 'Таблица пуста')
+
+def data_was_created(model)
+  puts "Данные созданы: #{model} (#{model.count})"
+end
+
+def data_was_clear(model)
+  puts "Данные очищены: #{model} (#{model.count})"
+
 end
 
 def id(model, params)
   model.where(params).pluck(:id).first
 end
+
 
 models = [Role, User, Category, Test, TestPassage, Question, Answer]
 models.each do |model|
@@ -64,6 +74,10 @@ RoleUser.create!([
 ])
 data_was_created(RoleUser)
 
+models = [User, Category, Test, TestUser, Question, Answer]
+models.each { |model| data_was_clear(model) if model.destroy_all }
+
+
 User.create!([
 {
   first_name: 'Сергей',
@@ -72,10 +86,13 @@ User.create!([
 {
   first_name: 'Мира',
   last_name:  'Елкова',
+
 },
 {
   first_name: 'Миша',
   last_name:  'Дубов'
+
+
 }
 ]);
 data_was_created(User)
@@ -133,6 +150,7 @@ Test.create!([
 ]);
 data_was_created(Test)
 
+
 TestAuthor.create!([
   {
     user_id: id(User, { last_name: 'Дубов' }),
@@ -176,6 +194,29 @@ TestPassage.create!([
   },
 ])
 data_was_created(TestPassage)
+
+Question.create!([
+
+
+TestUser.create!([
+  {
+    user_id: id(User, { last_name: 'Луков' }),
+    test_id: id(Test, { title: 'Модели Ruby on Rails' })
+  },
+  {
+    user_id: id(User, { last_name: 'Луков' }),
+    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' })
+  },
+  {
+    user_id: id(User, { last_name: 'Елкова' }),
+    test_id: id(Test, { title: 'Основы PHP' })
+  },
+  {
+    user_id: id(User, { last_name: 'Елкова' }),
+    test_id: id(Test, { title: 'Основы HTML' })
+  },
+])
+data_was_created(TestUser)
 
 Question.create!([
 
@@ -223,7 +264,7 @@ Question.create!([
     level: 1,
     test_id: id(Test, { title: 'Ruby' })
   },
-  #
+
   {
     #id: 8
     body: 'текст',
