@@ -12,6 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2019_05_31_170806) do
 
+
+
+  create_table "answers", force: :cascade do |t|
+    t.string "body", null: false
+    t.integer "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "correct", default: false
+    t.integer "user_id", null: false
+
   create_table "answers", force: :cascade do |t|
     t.text "body", null: false
     t.integer "question_id", null: false
@@ -19,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_170806) do
     t.datetime "updated_at", null: false
     t.boolean "correct"
     t.integer "user_id"
+
   end
 
   create_table "categories", force: :cascade do |t|
@@ -28,20 +39,58 @@ ActiveRecord::Schema.define(version: 2019_05_31_170806) do
   end
 
   create_table "questions", force: :cascade do |t|
+
+    t.string "body", null: false
+    t.integer "level", default: 0
+
     t.text "body", null: false
     t.integer "level", default: 0, null: false
+
     t.integer "test_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
+  create_table "role_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
+
+  create_table "tests", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "level", default: 0, null: false
+    t.integer "category_id", null: false
+
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
+  create_table "test_authors", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "test_id", null: false
+  end
+
+  create_table "test_passages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "test_id", null: false
+    t.datetime "begin_at", null: false
+    t.datetime "end_at"
+    t.boolean "evaluation", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tests", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "level", default: 0, null: false
+    t.integer "level", default: 0
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
 
   create_table "test_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
@@ -56,5 +105,4 @@ ActiveRecord::Schema.define(version: 2019_05_31_170806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 end

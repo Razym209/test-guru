@@ -7,20 +7,76 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # Вопросы для "Основы CSS"
 
+
+def print_msg(model, msg)
+  puts "-> #{model}: #{msg} (#{model.count})"
+end
+
+def data_was_created(model)
+  print_msg(model, 'Данные созданы')
+end
+
+def data_was_clear(model)
+  print_msg(model, 'Данные очищены')
+end
+
+def table_empty(model)
+  print_msg(model, 'Таблица пуста')
+
 def data_was_created(model)
   puts "Данные созданы: #{model} (#{model.count})"
 end
 
 def data_was_clear(model)
   puts "Данные очищены: #{model} (#{model.count})"
+
 end
 
 def id(model, params)
   model.where(params).pluck(:id).first
 end
 
+
+models = [Role, User, Category, Test, TestPassage, Question, Answer]
+models.each do |model|
+  if model.count > 0
+    data_was_clear(model) if model.destroy_all
+  else
+    table_empty(model)
+  end
+end
+puts
+
+Role.create!([
+{
+  name: 'Администратор',
+},
+{
+  name: 'Пользователь'
+}
+])
+data_was_created(Role)
+
+RoleUser.create!([
+  {
+    user_id: id(User, { last_name:  'Луков' }),
+    role_id: id(Role, { name: 'Пользователь' })
+  },
+  {
+    user_id: id(User, { last_name:  'Елкова' }),
+    role_id: id(Role, { name: 'Пользователь' })
+  },
+  {
+    user_id: id(User, { last_name:  'Дубов' }),
+    role_id: id(Role, { name: 'Администратор' })
+  }
+])
+])
+data_was_created(RoleUser)
+
 models = [User, Category, Test, TestUser, Question, Answer]
 models.each { |model| data_was_clear(model) if model.destroy_all }
+
 
 User.create!([
 {
@@ -30,6 +86,13 @@ User.create!([
 {
   first_name: 'Мира',
   last_name:  'Елкова',
+
+},
+{
+  first_name: 'Миша',
+  last_name:  'Дубов'
+
+
 }
 ]);
 data_was_created(User)
@@ -87,6 +150,54 @@ Test.create!([
 ]);
 data_was_created(Test)
 
+
+TestAuthor.create!([
+  {
+    user_id: id(User, { last_name: 'Дубов' }),
+    test_id: id(Test, { title: 'Модели Ruby on Rails' })
+  },
+  {
+    user_id: id(User, { last_name: 'Дубов' }),
+    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' })
+  },
+  {
+    user_id: id(User, { last_name: 'Дубов' }),
+    test_id: id(Test, { title: 'Основы PHP' })
+  },
+  {
+    user_id: id(User, { last_name: 'Дубов' }),
+    test_id: id(Test, { title: 'Основы HTML' })
+  },
+])
+data_was_created(TestAuthor)
+
+TestPassage.create!([
+  {
+    user_id: id(User, { last_name: 'Луков' }),
+    test_id: id(Test, { title: 'Модели в Ruby on Rails' }),
+    begin_at: Time.now
+  },
+  {
+    user_id: id(User, { last_name: 'Луков' }),
+    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' }),
+    begin_at: Time.now
+  },
+  {
+    user_id: id(User, { last_name: 'Елкова' }),
+    test_id: id(Test, { title: 'Основы PHP' }),
+    begin_at: Time.now
+  },
+  {
+    user_id: id(User, { last_name: 'Елкова' }),
+    test_id: id(Test, { title: 'Основы HTML' }),
+    begin_at: Time.now
+  },
+])
+data_was_created(TestPassage)
+
+Question.create!([
+
+
 TestUser.create!([
   {
     user_id: id(User, { last_name: 'Луков' }),
@@ -108,7 +219,7 @@ TestUser.create!([
 data_was_created(TestUser)
 
 Question.create!([
-  # Вопросы для "Основы PHP"
+
   {
     #id: 1
     body: 'текст',
@@ -127,7 +238,7 @@ Question.create!([
     level: 1,
     test_id: id(Test, { title: 'Основы PHP' })
   },
-  # Вопросы для "Основы HTML"
+
   {
     #id: 4
     body: 'текст',
@@ -146,21 +257,21 @@ Question.create!([
     level: 1,
     test_id: id(Test, { title: 'Основы HTML' })
   },
-  # Вопросы для ""
+
   {
     #id: 7
     body: 'текст',
     level: 1,
     test_id: id(Test, { title: 'Ruby' })
   },
-  # Вопросы для "Фауна для самых маленьких"
+
   {
     #id: 8
     body: 'текст',
     level: 1,
     test_id: id(Test, { title: 'Ruby' })
   },
-  # Вопросы для "Фауна Байкала"
+
   {
     #id: 9
     body: 'текст',
@@ -173,7 +284,7 @@ Question.create!([
     level: 1,
     test_id: id(Test, { title: 'Ruby' })
   },
-  # Вопросы для "Модели в Ruby on Rails"
+
   {
     #id: 11
     body: 'текст',
@@ -186,7 +297,7 @@ Question.create!([
     level: 2,
     test_id: id(Test, { title: 'Модели в Ruby on Rails' })
   },
-  # Вопросы для "Контроллеры в Ruby on Rails"
+
   {
     #id: 13
     body: 'текст',
