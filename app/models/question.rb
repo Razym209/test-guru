@@ -1,5 +1,4 @@
-
- class Question < ApplicationRecord
+class Question < ApplicationRecord
   belongs_to :test
 
   has_many :answers
@@ -16,12 +15,12 @@
 
   def validation_answers_count_range
     unless answers_count_in_range?
-      error = "must include from #{Setting.min_answers} to #{Setting.max_answers} answers"
+       error = "must include from X to N answer count: #{Setting.answers_range}"
       errors.add(:question, error)
     end
   end
 
   def answers_count_in_range?
-    (Setting.min_answers..Setting.max_answers).include?(answers.count)
+     Setting.answers_range.include?(answers.count)
   end  
 end
