@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to session[:target_request] || root_path
     else
-      flash.now[:alert] = "Авторизуйтесь с помощью эл.почты и пароля"
+      flash.now[:alert] = "Авторизуйтесь с помощью эл.почты"
       render :new
     end
   end
