@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_170927) do
+ActiveRecord::Schema.define(version: 2019_06_24_041353) do
 
   create_table "answers", force: :cascade do |t|
     t.string "body", null: false
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_170927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "correct", default: false
-    t.integer "user_id", null: false
+    t.integer "sort", default: 0
   end
 
   create_table "categories", force: :cascade do |t|
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_170927) do
     t.integer "test_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sort", default: 0
   end
 
   create_table "role_users", force: :cascade do |t|
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_170927) do
     t.datetime "updated_at", null: false
   end
 
-   create_table "settings", force: :cascade do |t|
+  create_table "settings", force: :cascade do |t|
     t.string "name", null: false
     t.string "setting", null: false
     t.string "value", null: false
@@ -55,19 +56,14 @@ ActiveRecord::Schema.define(version: 2019_05_31_170927) do
     t.index ["setting"], name: "index_settings_on_setting", unique: true
   end
 
-  create_table "test_authors", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "test_id", null: false
-  end
-
   create_table "test_passages", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "test_id", null: false
-    t.datetime "begin_at", null: false
-    t.datetime "end_at"
     t.boolean "evaluation", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "correct_questions", default: 0
+    t.integer "current_question_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -85,5 +81,5 @@ ActiveRecord::Schema.define(version: 2019_05_31_170927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-end
 
+end

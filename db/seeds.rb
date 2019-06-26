@@ -154,26 +154,6 @@ Test.create!([
 ]);
 data_was_created(Test)
 
-TestAuthor.create!([
-  {
-    user_id: id(User, { last_name: 'Дубов' }),
-    test_id: id(Test, { title: 'Модели Ruby on Rails' })
-  },
-  {
-    user_id: id(User, { last_name: 'Дубов' }),
-    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' })
-  },
-  {
-    user_id: id(User, { last_name: 'Дубов' }),
-    test_id: id(Test, { title: 'Основы PHP' })
-  },
-  {
-    user_id: id(User, { last_name: 'Дубов' }),
-    test_id: id(Test, { title: 'Основы HTML' })
-  },
-])
-data_was_created(TestAuthor)
-
 TestPassage.create!([
   {
     user_id: id(User, { last_name: 'Луков' }),
