@@ -1,7 +1,7 @@
 class TestsController < ApplicationController
-  
+
+  before_action :authenticate_user!, except: %i[index]
   before_action :set_test, only: %i[show update edit start]
-  before_action :set_user, only: :start
 
   def index
     @tests = Test.all.order(:category_id, :title, :level)
@@ -32,9 +32,9 @@ class TestsController < ApplicationController
   end
 
   def start
-    @user.tests.push(@test)
+    current_user.tests.push(@test)
     
-    redirect_to @user.test_passage(@test)
+    redirect_to current_user.test_passage(@test)
   end
 
   def destroy
@@ -49,12 +49,7 @@ class TestsController < ApplicationController
     params.require(:test).permit(:title, :level, :category_id)
   end
 
-  def set_user
-    @user = User.first
-  end
-
   def set_test
     @test = Test.find(params[:id])
   end
-
 end
