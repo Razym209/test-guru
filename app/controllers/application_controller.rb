@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     unless current_user
       session[:target_request] = request.fullpath
-      redirect_to login_path, alert: "Авторизуйтесь с помощью эл.почты и пароля"
+      redirect_to login_path, alert: "Авторизуйтесь с помощью эл.почты"
     end
   end
 
