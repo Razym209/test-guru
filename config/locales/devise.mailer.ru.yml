@@ -1,0 +1,9 @@
+ru:
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: "Инструкции по подтверждению учётной записи."
+      unlock_instructions:
+        subject: "Инструкции по разблокировке учётной записи."
+      email_changed:
+        subject: "Электронный адрес был изменён."
