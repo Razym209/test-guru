@@ -1,0 +1,9 @@
+en:
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: "Confirmation instructions"
+      unlock_instructions:
+        subject: "Unlock instructions"
+      email_changed:
+        subject: "Email Changed"

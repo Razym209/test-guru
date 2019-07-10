@@ -1,31 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :not_find
+  before_action :set_locale
 
-  helper_method :current_user,
-                :logged_in?
-  private
-
-  def not_find
-    render inline: '<h2>Запись не найдена.</h2>', status: 404
-  end 
-
-  def authenticate_user!
-    unless current_user
-      session[:target_request] = request.fullpath
-      redirect_to login_path, alert: "Авторизуйтесь с помощью эл.почты"
+  def default_url_options
+    if I18n.default_locale == I18n.locale
+      Rails.application.config.action_controller.default_url_options
+    else
+      Rails.application.config.action_controller.default_url_options.merge(lang: I18n.locale)
     end
   end
 
-  def already_authenticated_user!
-    redirect_to root_path if current_user
-  end
+  private
 
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-  end
-
-  def logged_in?
-    current_user.present?
+  def set_locale
+    I18n.locale = I18n.locale_available?(params[:lang]) ? params[:lang] : I18n.default_locale
   end
 end

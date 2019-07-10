@@ -1,33 +1,87 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 ru:
   hello: "Привет, мир"
+
+  layouts:
+    admin:
+      title: "Админ панель"
+    admin_header:
+      administration: "[Администрирование]" 
+    user_navigation:
+      tests: "Тесты"
+      logout: "Выход"
+      registration: "Регистрация"
+      sign_in: "Войти"
+
+  tests:
+    index:
+      header: "Доступные Тесты"
+      category: "Категория"
+      title: "Название"
+      level: "Уровень"
+      quantity_of_questions: "Кол-во вопросов"
+      actions: "Действия"
+    test:
+      start_test: "Начать тест"
+
+  admin:
+    tests:
+      index:
+        header: "Доступные Тесты"
+        category: "Категория"
+        title: "Название"
+        level: "Уровень"
+        quantity_of_questions: "Кол-во вопросов"
+        actions: "Действия"
+        new_test: "Новый тест"
+      new:
+        header: "Новый тест"
+      edit:
+        header: "Редактировать тест"
+      show:
+        title: "Название"
+        category: "Категория"
+        level: "Уровень"
+        authors: "Авторы"
+        questions: "Вопросы"
+        question: "Вопрос"
+        quantity_of_answers: "Кол-во ответов"
+        new_question: "Новый вопрос"
+      link_to_tests:
+        all_tests: "Все тесты"
+      test:
+        edit: "Редактировать"
+        delete: "Удалить"
+      form:
+        select:
+          prompt: "Выберите категорию"
+
+  test_passages:
+    form:
+      next: "Далее"
+    result:
+      header: "Результат теста \"%{test_title}\""
+      right_answers: "Правильных ответов"
+      result: "Результат"
+      all_tests: "Все тесты"
+    show:
+      header: "Прохождение теста"
+
+  helpers:
+    submit:
+      user:
+        create: "Войти"
+      test:
+        create: "Создать Тест"
+        update: "Обновить Тест"
+    label:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        email: "Эл.почта"
+        remember_me: "Запомнить меня"
+      test:
+        title: "Название"
+        level: "Уровень"
+        category_id: "Категория"
+    select:
+prompt: "Выберите..."
