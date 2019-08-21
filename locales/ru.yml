@@ -1,0 +1,147 @@
+ru:
+  question_of_the_test: "Вопрос теста \"%{test_title}\""
+
+  layouts:
+    admin:
+      title: "Админ панель"
+    nav:
+      registration: "Регистрация"
+      administration: "Администрирование"
+      tests: "Тесты"
+      logout: "Выход"
+      sign_in: "Войти"
+      welcome_guru: "Добро пожаловать,"
+
+  shared:
+    errors:
+      errors: "Ошибки"
+
+  tests:
+    index:
+      header: "Доступные Тесты"
+      category: "Категория"
+      title: "Название"
+      level: "Уровень"
+      quantity_of_questions: "Кол-во вопросов"
+      actions: "Действия"
+    sort_panel:
+      sort: "Сортировать"
+      sort_by_title: "Название"
+      sort_by_level: "Сложность"
+      sort_by_popularity: "Популярность"
+    test:
+      start_test: "Начать тест"
+      test_level: 'Сложность: %{test_level}'
+      question_count: 'Вопросов: %{question_count}'
+
+  admin:
+    gists:
+      index:
+        gists: "Gist'ы"
+        user: "Пользователь"
+        question: "Вопрос"
+        gist_url: "Ссылка на gist"
+    tests:
+      index:
+        header: "Доступные Тесты"
+        category: "Категория"
+        title: "Название"
+        level: "Уровень"
+        quantity_of_questions: "Кол-во вопросов"
+        actions: "Действия"
+        new_test: "Новый тест"
+      new:
+        header: "Новый тест"
+      edit:
+        header: "Редактировать тест \"%{test_title}\""
+      show:
+        title: "Название"
+        category: "Категория"
+        level: "Уровень"
+        authors: "Авторы"
+        questions: "Вопросы"
+        question: "Вопрос"
+        quantity_of_answers: "Кол-во ответов"
+        new_question: "Новый вопрос"
+      link_to_tests:
+        all_tests: "Все тесты"
+      test:
+        edit: "Редакт."
+        edit_inline: "Редакт. быстр."
+        delete: "Удалить"
+      form:
+        select:
+          prompt: "Выберите категорию"
+      form_inline:
+        submit: "ОК"
+    home:
+      index:
+        header: "Администрирование"
+      categories:
+        tests: "Тесты"
+        users: "Пользователи"
+        gists: "Gist'ы"
+        edit: "Редактировать"
+        show: "Показать"
+        tests_count:
+          one: "Всего %{count} тест"
+          few: "Всего %{count} теста"
+          many: "Всего %{count} тестов"
+          other: "Всего %{count} тестов"
+        users_count:
+          one: "Всего %{count} пользователь"
+          few: "Всего %{count} пользователя"
+          many: "Всего %{count} пользователей"
+          other: "Всего %{count} пользователей"
+        gists_count:
+          one: "Всего %{count} gist"
+          few: "Всего %{count} gist'а"
+          many: "Всего %{count} gist'ов"
+          other: "Всего %{count} gist'ов"
+
+  test_passages:
+    form:
+      next: "Далее"
+    result:
+      header: "Результат теста \"%{test_title}\""
+      right_answers: "Правильных ответов"
+      result: "Результат"
+      all_tests: "Все тесты"
+    show:
+      header: "Прохождение теста"
+      dificult_answer: "У меня сложности с этим вопросом"
+    gist:
+      success: "Вопрос успешно <a target=\"_blank\" href=\"%{url}\">отправлен</a>"
+      failure: "Ошибка при отправке вопроса"
+
+  main:
+    index:
+      header: "Мир гуруметрии"
+      tests: "Тесты"
+      statistics: "Статистика"
+      self_assessment: "Оценка себя"
+      passage_tests: "Проходи различные тесты!"
+      compare_your_results: "Сравнивай свои результаты с остальными!"
+      how_guru_are_you: "Проверяй, насколько ты гуру!"
+
+  helpers:
+    submit:
+      user:
+        create: "Войти"
+      test:
+        create: "Создать Тест"
+        update: "Обновить Тест"
+    label:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        email: "Эл.почта"
+        password: "Пароль"
+        password_confirmation: "Повторите пароль"
+        remember_me: "Запомнить меня"
+      test:
+        title: "Название"
+        level: "Уровень"
+        category_id: "Категория"
+    select:
+      prompt: "Выберите..."

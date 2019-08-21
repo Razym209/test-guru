@@ -1,0 +1,142 @@
+en:
+  question_of_the_test: "Question of the test \"%{test_title}\""
+
+  layouts:
+    admin:
+      title: "Admin Panel"
+    nav:
+      tests: "Tests"
+      administration: "Administration"
+      logout: "Logout"
+      registration: "Registration"
+      sign_in: "Sign in"
+      welcome: "Welcome guru"
+
+  shared:
+    errors:
+      errors: "Errors"
+
+  tests:
+    index:
+      header: "Tricky Tests"
+      category: "Category"
+      title: "Title"
+      level: "Level"
+      quantity_of_questions: "Quantity of questions"
+      actions: "Actions"
+    sort_panel:
+      sort: "Sort"
+      sort_by_title: "By Title"
+      sort_by_level: "By Level"
+      sort_by_popularity: "By Popularity"
+    test:
+      start_test: "Start test"
+      test_level: 'Level: %{test_level}'
+      question_count: 'Questions: %{question_count}'
+
+  admin:
+    gists:
+      index:
+        gists: "Gists"
+        user: "User"
+        question: "Question"
+        gist_url: "Link to gist"
+    tests:
+      index:
+        header: "Tricky Tests"
+        category: "Category"
+        title: "Title"
+        level: "Level"
+        quantity_of_questions: "Quantity of questions"
+        actions: "Actions"
+        new_test: "New test"
+      new:
+        header: "New test"
+      edit:
+        header: "Edit test \"%{test_title}\""
+      show:
+        title: "Title"
+        category: "Category"
+        level: "Level"
+        authors: "Authors"
+        questions: "Questions"
+        question: "Questions"
+        quantity_of_answers: "Quantity of answers"
+        new_question: "New question"
+      link_to_tests:
+        all_tests: "All tests"
+      form:
+        title: "Title"
+      form_inline:
+        submit: "OK"
+      test:
+        edit: "Edit"
+        edit_inline: "Fast edit"
+        delete: "Delete"
+        category: "Category"
+        level: "Level"
+    home:
+      index:
+        header: "Administration"
+      categories:
+        tests: "Tests"
+        users: "Users"
+        gists: "Gists"
+        show: "Show"
+        edit: "Edit"
+        tests_count:
+          one: "Created %{count} test"
+          other: "Created %{count} tests"
+        users_count:
+          one: "Created %{count} user"
+          other: "Created %{count} users"
+        gists_count:
+          one: "Created %{count} gist"
+          other: "Created %{count} gists"
+
+  test_passages:
+    form:
+      next: "Next"
+    result:
+      header: "Result test \"%{test_title}\""
+      right_answers: "Right answers"
+      result: "Result"
+      all_tests: "All tests"
+    show:
+      header: "Passing test"
+      dificult_answer: "I have problems with the question"
+    gist:
+      success: "Question was <a target=\"_blank\" href=\"%{url}\">send</a>"
+      failure: "Error while question send"
+
+  main:
+    index:
+      header: "World of gurumetry"
+      tests: "Tests"
+      statistics: "Statistics"
+      self_assessment: "Self-assessment"
+      passage_tests: "Pass various tests!"
+      compare_your_results: "Compare your results with the rest!"
+      how_guru_are_you: "Check how guru are you!"
+
+  helpers:
+    submit:
+      user:
+        create: "Log in"
+      test:
+        create: "Create Test"
+        update: "Update Test"
+    label:
+      user:
+        first_name: "First name"
+        last_name: "Last name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        remember_me: "Remember me"
+      test:
+        title: "Title"
+        level: "Level"
+        category_id: "Category"
+    select:
+      prompt: "Select..."
