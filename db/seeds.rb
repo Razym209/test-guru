@@ -1,12 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-# Вопросы для "Основы CSS"
 
+def admin_email
+  'test.guru.contact@gmail.com'
+end
 
 def print_msg(model, msg)
   puts "-> #{model}: #{msg} (#{model.count})"
@@ -28,7 +23,6 @@ def id(model, params)
   model.where(params).pluck(:id).first
 end
 
-
 models = [Role, User, Category, Test, TestPassage, Question, Answer, Setting]
 models.each do |model|
   if model.count > 0
@@ -41,12 +35,12 @@ puts
 
 Setting.create!([
   {
-    name: 'Макс. кол-во ответов на вопрос',
+    name: 'max_answers',
     setting: 'max_answers',
     value: '4'
   },
   {
-    name: 'Мин. кол-во ответов на вопрос',
+    name: 'min_answers',
     setting: 'min_answers',
     value: '1'
   }
@@ -63,240 +57,391 @@ Role.create!([
 ])
 data_was_created(Role)
 
+Admin.create!([
+{
+  first_name: 'Имя',
+  last_name: 'Фамилия',
+  email: admin_email,
+  email_contactable: true,
+  password: '1234567890'
+}
+])
+data_was_created(Admin)
+
 RoleUser.create!([
   {
-    user_id: id(User, { last_name:  'Луков' }),
-    role_id: id(Role, { name: 'Пользователь' })
-  },
-  {
-    user_id: id(User, { last_name:  'Елкова' }),
-    role_id: id(Role, { name: 'Пользователь' })
-  },
-  {
-    user_id: id(User, { last_name:  'Дубов' }),
+    user_id: id(User, { email: admin_email }),
     role_id: id(Role, { name: 'Администратор' })
-  }
-])
+  },
 ])
 data_was_created(RoleUser)
-
-models = [User, Category, Test, TestUser, Question, Answer]
-models.each { |model| data_was_clear(model) if model.destroy_all }
-
-
-
-User.create!([
-{
-  first_name: 'Сергей',
-  last_name:  'Луков',
-},
-{
-  first_name: 'Мира',
-  last_name:  'Елкова',
-},
-{
-  first_name: 'Миша',
-  last_name:  'Дубов'
-}
-]);
-data_was_created(User)
 
 Category.create!([
   { title: 'PHP' },
   { title: 'HTML' },
-  { title: 'Ruby' }
-]);
+  { title: 'Ruby' },
+])
 data_was_created(Category)
 
+
 Test.create!([
-  {
-    #id: 1
-    title: 'Основы PHP',
+  { title: 'Основы PHP',
     level: 0,
-    category_id: id(Category, { title: 'PHP' })
+    category_id: id(Category, { title: 'PHP' }),
   },
   {
-    #id: 2
-    title: 'история PHP',
-    level: 0,
-    category_id: id(Category, { title: 'PHP' })
-  },
-  {
-    #id: 3
     title: 'Основы HTML',
     level: 0,
-    category_id: id(Category, { title: 'HTML' })
+    category_id: id(Category, { title: 'HTML' }),
   },
   {
-    #id: 4
-    title: 'история HTML',
-    level: 0,
-    category_id: id(Category, { title: 'HTML' })
-  },
-  {
-    #id: 5
-    title: 'погружение в HTML',
-    level: 3,
-    category_id: id(Category, { title: 'HTML' })
-  },
-  {
-    #id: 6
-    title: 'Модели в Ruby on Rails',
-    level: 2,
-    category_id: id(Category, { title: 'Ruby' })
-  },
-  {
-    #id: 7
-    title: 'Контроллеры в Ruby on Rails',
+    title: 'погружение в Ruby',
     level: 1,
-    category_id: id(Category, { title: 'Ruby' })
+    category_id: id(Category, { title: 'Ruby' }),
   },
-]);
+  {
+    title: 'Модели в Ruby',
+    level: 0,
+    category_id: id(Category, { title: 'Ruby' }),
+  }
+])
 data_was_created(Test)
 
-TestPassage.create!([
+TestAuthor.create!([
   {
-    user_id: id(User, { last_name: 'Луков' }),
-    test_id: id(Test, { title: 'Модели в Ruby on Rails' }),
-    begin_at: Time.now
+    user_id: id(User, { email: admin_email }),
+    test_id: id(Test, { title: 'Основы PHP' })
   },
   {
-    user_id: id(User, { last_name: 'Луков' }),
-    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' }),
-    begin_at: Time.now
+    user_id: id(User, { email: admin_email }),
+    test_id: id(Test, { title: 'Основы HTML' })
   },
   {
-    user_id: id(User, { last_name: 'Елкова' }),
-    test_id: id(Test, { title: 'Основы PHP' }),
-    begin_at: Time.now
+    user_id: id(User, { email: admin_email }),
+    test_id: id(Test, { title: 'погружение в Ruby' })
   },
   {
-    user_id: id(User, { last_name: 'Елкова' }),
-    test_id: id(Test, { title: 'Основы HTML' }),
-    begin_at: Time.now
+    user_id: id(User, { email: admin_email }),
+    test_id: id(Test, { title: 'Модели в Ruby' })
   },
 ])
-data_was_created(TestPassage)
+data_was_created(TestAuthor)
+
+
 
 Question.create!([
 
+  #Вопросы PHP
   {
-    #id: 1
+    body: 'текст',
+    level: 0,
+    test_id: id(Test, { title: 'Основы PHP' })
+  },
+  {
     body: 'текст',
     level: 1,
     test_id: id(Test, { title: 'Основы PHP' })
   },
   {
-    #id: 2
-    body: 'текст',
-    level: 2,
-    test_id: id(Test, { title: 'Основы PHP' })
-  },
-  {
-    #id: 3
     body: 'текст',
     level: 1,
     test_id: id(Test, { title: 'Основы PHP' })
   },
 
+  #Вопросы HTML
   {
-    #id: 4
-    body: 'текст',
-    level: 2,
-    test_id: id(Test, { title: 'Основы HTML' })
-  },
-  {
-    #id: 5
     body: 'текст',
     level: 1,
     test_id: id(Test, { title: 'Основы HTML' })
   },
   {
-    #id: 6
+    body: 'текст',
+    level: 1,
+    test_id: id(Test, { title: 'Основы HTML' })
+  },
+  {
     body: 'текст',
     level: 1,
     test_id: id(Test, { title: 'Основы HTML' })
   },
 
+  #Вопросы погружение в Ruby
   {
-    #id: 7
     body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Ruby' })
+    level: 0,
+    test_id: id(Test, { title: 'погружение в Ruby' })
+  },
+  {
+    body: 'текст',
+    level: 0,
+    sort: 1,
+    test_id: id(Test, { title: 'погружение в Ruby' })
+  },
+  {
+    body: 'текст',
+    level: 0,
+    sort: 2,
+    test_id: id(Test, { title: 'погружение в Ruby' })
   },
 
+  #Вопросы Модели в Ruby
   {
-    #id: 8
     body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Ruby' })
-  },
-
-  {
-    #id: 9
-    body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Ruby' })
+    level: 0,
+    sort: 0,
+    test_id: id(Test, { title: 'Модели в Ruby' })
   },
   {
-    #id: 10
     body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Ruby' })
+    level: 0,
+    sort: 1,
+    test_id: id(Test, { title: 'Модели в Ruby' })
   },
-
-  {
-    #id: 11
-    body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Модели в Ruby on Rails' })
-  },
-  {
-    #id: 12
-    body: 'текст',
-    level: 2,
-    test_id: id(Test, { title: 'Модели в Ruby on Rails' })
-  },
-
-  {
-    #id: 13
-    body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' })
-  },
-  {
-    #id: 14
-    body: 'текст',
-    level: 1,
-    test_id: id(Test, { title: 'Контроллеры в Ruby on Rails' })
-  }
 ])
 data_was_created(Question)
 
 Answer.create!([
   {
-    body: 'текст',
-    question_id: id(Question, { body: 'текст' }),
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос"' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 1,
+    question_id: id(Question, { body: 'Вопрос"' }),
     correct: true
   },
   {
-    body: 'текст',
-
-    question_id: id(Question, { body: 'текст' }),
+    body: '-',
+    sort: 2,
+    question_id: id(Question, { body: 'Вопрос"' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 1,
+    question_id: id(Question, { body: 'Вопрос' }),
     correct: true
   },
   {
-    body: 'текст',
-
-    question_id: id(Question, { body: 'текст' }),
-    correct: true,
+    body: '+',
+    sort: 2,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
   },
   {
-    body: 'текст',
-
-    question_id: id(Question, { body: 'текст' }),
-    correct: false,
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 1,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 2,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 3,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 1,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 2,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 1,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 2,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '+',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 0,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '+',
+    sort: 1,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: true
+  },
+  {
+    body: '-',
+    sort: 2,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
+  },
+  {
+    body: '-',
+    sort: 3,
+    question_id: id(Question, { body: 'Вопрос' }),
+    correct: false
   }
 ])
 data_was_created(Answer)
 
+puts "\nСоздана болочка данных"

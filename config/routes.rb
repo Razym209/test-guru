@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'main#show'
+  root 'main#index'
 
   devise_for :users,
              path: :gurus,
@@ -12,6 +12,10 @@ Rails.application.routes.draw do
                registrations: 'users/registrations'
              }
 
+
+  get :contact, to: 'contact#index'
+  post :contact, to: 'contact#send_message'
+
   resources :tests, only: :index do
     post :start, on: :member
   end
@@ -23,8 +27,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get :admin, to: "admin/home#index"
   namespace :admin do
     resources :tests do
+      patch :update_inline, on: :member
       resources :questions, shallow: true do
         resources :answers, shallow: true
       end
@@ -32,5 +38,3 @@ Rails.application.routes.draw do
     resources :gists, only: %[index]
   end
 end
-
-
