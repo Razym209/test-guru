@@ -1,17 +1,14 @@
 <div class="col-md-4 text-xs-center" sortable-element>
-
-   <div class="card mb-4 light-card">
-
+  <div class="card mb-4 light-card">
     <div class="card-block">
-     <p class="card-title" sort-by="title">
+      <p class="card-title" sort-by="title">
         <%= test.title %><br>
         <span class="text-muted"><small><%= test.category.title %></small></span>
       </p>
       <p class="card-text">
-        <%= button_to t('.start_test'), start_test_path(test), class: "btn btn-outline-primary" %>
+        <%= button_to t('.start_test'), start_test_path(test), class: "btn light-button" %>
       </p>
     </div>
-
     <div class="card-footer text-muted p-1">
       <div class="d-flex justify-content-start">
         <div class="mr-auto p-1 text-left">
@@ -31,7 +28,5 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>

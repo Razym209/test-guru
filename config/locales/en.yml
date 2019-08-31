@@ -9,8 +9,26 @@ en:
       administration: "Administration"
       logout: "Logout"
       registration: "Registration"
+      contact_us: "Contact us"
       sign_in: "Sign in"
       welcome: "Welcome guru"
+
+  shared:
+    errors:
+      errors: "Errors"
+
+  contact:
+    index:
+      header: 'Contact us'
+      message: 'Message'
+      send: 'Send'
+      email: 'Your contact email'
+    send_message:
+      send_success: 'Message was successfully sent'
+      send_failure: 'Sorry, there was an error while sending the message. Please, try again later>'
+      empty_email: 'Not specified'
+      empty_message: 'Message can not be empty'
+      invalid_email: 'Correctly specify e-mail or leave blank'
 
   tests:
     index:
@@ -20,20 +38,60 @@ en:
       level: "Level"
       quantity_of_questions: "Quantity of questions"
       actions: "Actions"
-  sort_panel:
+    sort_panel:
       sort: "Sort"
-      sort_title_asc: "By Title"
-      sort_title_desc: "By Title"
-      sort_level_asc: "By Level"
-      sort_level_desc: "By Level"
-      sort_popularity_desc: "By Popularity"
-      sort_popularity_asc: "By Popularity"
+      sort_by_title: "By Title"
+      sort_by_level: "By Level"
+      sort_by_popularity: "By Popularity"
     test:
       start_test: "Start test"
       test_level: 'Level: %{test_level}'
       question_count: 'Questions: %{question_count}'
 
   admin:
+    gists:
+      index:
+        gists: "Gists"
+        user: "User"
+        question: "Question"
+        gist_url: "Link to gist"
+    questions:
+      show:
+        question: 'Question'
+        answer: 'Answer'
+        is_correct: 'Correct?'
+        sort: 'Sort'
+        new_answer: 'New answer'
+        back: 'Back'
+        max_answers: 'Max answers'
+        actions: 'Actions'
+        test: 'Test'
+        level: 'Level'
+      form:
+        question: 'Question'
+        level: 'Level'
+        back: 'Back'
+      edit:
+        edit_question: 'Edit question to the test'
+      new:
+        new_question: 'New question'
+    answers:
+      show:
+        answer: 'Answer'
+        question: 'Question'
+        level: 'Level'
+        sort: 'Sort'
+        edit: 'Edit'
+        back: 'Back'
+      form:
+        answer: 'Answer'
+        is_correct: 'Correct?'
+        sort: 'Sort'
+        back: 'Back'
+      edit:
+        edit_answer: 'Edit answer to question'
+      new:
+        new_answer: 'New answer to the question'
     tests:
       index:
         header: "Tricky Tests"
@@ -53,15 +111,20 @@ en:
         level: "Level"
         authors: "Authors"
         questions: "Questions"
-        question: "Questions"
+        question: "Question"
         quantity_of_answers: "Quantity of answers"
         new_question: "New question"
+        test: 'Test'
       link_to_tests:
         all_tests: "All tests"
       form:
         title: "Title"
+        back: "Back"
+      form_inline:
+        submit: "OK"
       test:
         edit: "Edit"
+        edit_inline: "Fast edit"
         delete: "Delete"
         category: "Category"
         level: "Level"
@@ -70,14 +133,19 @@ en:
         header: "Administration"
       categories:
         tests: "Tests"
+        users: "Users"
+        gists: "Gists"
+        show: "Show"
         edit: "Edit"
         tests_count:
           one: "Created %{count} test"
           other: "Created %{count} tests"
-        users: "Users"
         users_count:
           one: "Created %{count} user"
           other: "Created %{count} users"
+        gists_count:
+          one: "Created %{count} gist"
+          other: "Created %{count} gists"
 
   test_passages:
     form:
@@ -89,6 +157,10 @@ en:
       all_tests: "All tests"
     show:
       header: "Passing test"
+      dificult_answer: "I have problems with the question"
+    gist:
+      success: "Question was <a target=\"_blank\" href=\"%{url}\">send</a>"
+      failure: "Error while question send"
 
   main:
     index:
@@ -112,10 +184,12 @@ en:
         first_name: "First name"
         last_name: "Last name"
         email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
         remember_me: "Remember me"
       test:
         title: "Title"
         level: "Level"
         category_id: "Category"
     select:
-prompt: "Select..."
+      prompt: "Select..."

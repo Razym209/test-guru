@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -7,7 +6,6 @@ class User < ApplicationRecord
          :trackable,
          :validatable,
          :confirmable
-
 
   has_many :test_passages
   has_many :tests, through: :test_passages
@@ -17,6 +15,7 @@ class User < ApplicationRecord
 
   has_many :gists
 
+  validate :validate_email_contactable_permission
   validate :validate_email_format
   validates :email, presence: true,
                     uniqueness: true
@@ -37,6 +36,40 @@ class User < ApplicationRecord
   end
 
   private
+
+  def validate_email_contactable_permission
+    errors.add(:email_contactable, 'Only admin have contactable email') if !admin? && email_contactable
+  end
+
+  def validate_email_format
+    errors.add(:email, 'Bad email format') unless email_format =~ email
+  end
+
+  def email_format
+    /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  end
+end
+  def uniq_completed_tests_ids
+    test_passages.completed.pluck(:test_id).uniq
+  end
+
+  def test_passage(test)
+    test_passages.order(id: :desc).find_by(test_id: test.id)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def admin?
+    is_a?(Admin)
+  end
+
+  private
+
+  def validate_email_contactable_permission
+    errors.add(:email_contactable, 'Only admin have contactable email') if !admin? && email_contactable
+  end
 
   def validate_email_format
     errors.add(:email, 'Bad email format') unless email_format =~ email
