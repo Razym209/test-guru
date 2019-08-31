@@ -1,4 +1,0 @@
-ru:
-  tests_mailer:
-    completed_test:
-      subject: "Вы завершили прохождение теста!"
