@@ -1,4 +1,4 @@
-hidden {
+.hidden {
   display: none;
 }
 
@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 div.container {
   flex: 1 0 auto;
   padding-top: 10px;

@@ -4,8 +4,9 @@ ru:
       links:
         log_in: "Вход"
         sign_up: "Регистрация"
+        forgot_password: "Забыли пароль?"
         didnt_recieve_confirm_instructions: "Не получили инструкцию по подтверджению?"
-        didnt_recieve_unlock_instructions: "Не получили инструкцию по разблокировке?"
+        didnt_recieve_unlock_instructions: "Не получили инструкцию по разблокировки?"
         sign_in_with: "Войти с помощью %{provider}"
     confirmations:
       confirmed: "Ваша учётная запись подтверждена."
@@ -14,20 +15,36 @@ ru:
       new:
         header: "Выслать инструкции по подтверждению"
         resend_confirmation_instructions: "Выслать инструкции по подтверждению"
+        placeholder_email: "example@domain.com"
     failure:
       already_authenticated: "Вы уже вошли в систему."
       inactive: "Ваша учётная запись ещё не активирована."
+      invalid: "Неверный %{authentication_keys} или пароль."
       locked: "Ваша учётная запись заблокирована."
+      last_attempt: "У вас осталась еще одна попытка ввести пароль до блокировки."
+      not_found_in_database: "Неверный %{authentication_keys} или пароль."
       timeout: "Ваш сеанс закончился. Пожалуйста, войдите в систему снова."
       unauthenticated: "Вам необходимо войти в систему или зарегистрироваться."
       unconfirmed: "Вы должны подтвердить вашу учётную запись."
     omniauth_callbacks:
       failure: "Вы не можете войти в систему с учётной записью из %{kind}, так как \"%{reason}\"."
       success: "Вход в систему выполнен с учётной записью из %{kind}."
+    passwords:
+      no_token: "Эта страница доступна только при переходе по ссылке для сброса пароля. Если вы перешли по ссылке из письма, пожалуйста, убедитесь, что вы использовали полный URL."
+      send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по восстановлению вашего пароля."
+      send_paranoid_instructions: "Если ваш электронный адрес есть в нашей базе данных, то в течение нескольких минут вы получите письмо с инструкциями по восстановлению вашего пароля."
+      updated: "Ваш пароль изменён. Теперь вы вошли в систему."
+      updated_not_active: "Пароль изменён."
       new:
+        header: "Забыли пароль?"
         email: "Эл.почта"
         send_me_instruction: "Выслать инструкцию по восстановлению"
         placeholder_email: "example@domain.com"
+      edit:
+        header: "Сменить пароль"
+        new_password: "Новый пароль"
+        confirm_new_password: "Подтвердите новый пароль"
+        change_password: "Изменить пароль"
     registrations:
       destroyed: "До свидания! Ваша учётная запись удалена. Надеемся снова увидеть вас."
       signed_up: "Добро пожаловать! Вы зарегистрировались."
@@ -48,11 +65,12 @@ ru:
         last_name: "Фамилия"
         email: "Эл.почта"
         placeholder_first_name: "Иван"
-        placeholder_last_name: "Кот"
+        placeholder_last_name: "Иванов"
         placeholder_email: "example@domain.com"
       edit:
         header: "Редактировать %{resource_name}"
         email: "Эл.почта"
+        need_current_password: "(необходимо ввести текущий пароль чтобы подтвердить изменения)"
         update: "Обновить"
         cancel_my_account: "Удалить учётную запись"
         are_you_sure: "Вы уверены?"
@@ -61,7 +79,7 @@ ru:
       signed_in: "Вход в систему выполнен."
       signed_out: "Выход из системы выполнен."
       already_signed_out: "Выход из системы выполнен."
-      signed_in_greeting: "Привет, %{user_name}!"
+      signed_in_greeting: "Привет, %{user_name}!" 
       new:
         header: "Вход"
         sign_in: "Войти"
