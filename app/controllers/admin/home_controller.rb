@@ -3,6 +3,7 @@ class Admin::HomeController < Admin::BaseController
   before_action :set_tests, only: %[index]
   before_action :set_users, only: %[index]
   before_action :set_gists, only: %[index]
+  before_action :set_badges, only: %[index]
 
   def index
   end
@@ -18,6 +19,9 @@ class Admin::HomeController < Admin::BaseController
   end
   def set_users
     @users = User.all
+  end
+  def set_badges
+    @badges = Badge.all
   end
 end
 
